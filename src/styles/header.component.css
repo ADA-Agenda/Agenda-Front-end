@@ -1,0 +1,19 @@
+#c-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #8657DB;
+    color: azure;
+    padding: 14px;
+    font-size: 2.2rem;
+}
+
+#c-header button {
+    border: none;
+    background: #8657DB;
+    color: #fff;
+    padding: 10px 30px;
+    cursor: pointer;
+    font-size: 1.8rem;
+}
+
