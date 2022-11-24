@@ -1,6 +1,7 @@
 @import url('./src/styles/header.component.css');
 @import url('./src/styles/login.page.css');
 @import url('./src/styles/contatos.page.css');
+@import url('./src/styles/criar-contato.page.css');
 
 * {
     margin: 0;
