@@ -28,11 +28,6 @@ export const ContactPost = async (formData) => {
 
 }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> ecfb9bb4eb43a5ccb7d1bc02e985ed4715c89133
 export const ContactPatch = async (formData) => {
     const headers = new Headers()
     headers.append('Content-Type', 'application/json')
@@ -47,10 +42,6 @@ export const ContactPatch = async (formData) => {
 
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ecfb9bb4eb43a5ccb7d1bc02e985ed4715c89133
 function ArrangeObject(formData) {
 
     const entries = Object.fromEntries(formData);
