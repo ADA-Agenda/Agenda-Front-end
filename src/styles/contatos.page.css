@@ -74,6 +74,10 @@
     gap: 0 12px;
 }
 
+.contacts__options{
+    display: flex;
+}
+
 
 .contacts__options button{
     background-color: #302F3D;
@@ -86,4 +90,5 @@
     justify-content: center;
     border-radius: 50%;
     cursor: pointer;
+    margin-left: .8em;
 }

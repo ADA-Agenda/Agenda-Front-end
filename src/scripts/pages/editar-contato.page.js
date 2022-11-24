@@ -1,36 +1,41 @@
-import { ContactPost } from "../services/contact.service.js"
+import { ContactPatch } from "../services/contact.service.js"
 
 
 const formCreate = document.createElement('form')
 formCreate.setAttribute('id', 'p-create')
 
-const criarContato = async (event) => {
+const editarContato = async (event) => {
     event.preventDefault()
     const fd = new FormData(formCreate)
-    const response = await ContactPost(fd)
+    const response = await ContactPatch(fd)
 
     if(response.status === 200) {
         window.open('#contatos', '_self')
-        window.alert("Contato Criado com Sucesso!")
+        window.alert("Contato Atualizado com Sucesso!")
     }
     else
     {
-        window.alert("Erro no criação! Verifique os dados inseridos!")
+        window.alert("Erro no edição! Verifique os dados inseridos!")
     }      
 }
 
 const events = () => {
-    formCreate.addEventListener('submit', criarContato)
+    formCreate.addEventListener('submit', editarContato)
 }
 
-export const CriarContato = () => {
+export const EditarContato = () => {
     formCreate.innerHTML = (`
         <h1>
-            Registrar novo Contato <a id="btn__criar" href="#contatos">Voltar</a>
+            Editar Contato <a id="btn__criar" href="#contatos">Voltar</a>
         </h1>
 
         <div class="big_box">
             <h3>Contato</h3>
+            <div class="form_idContato">
+
+                <label for="idContato">Id do contato</label>
+                <input id="idContato" name="idContato" value="${sessionStorage.getItem("@contactId")}">
+            </div>
             <div class="form_nome">
 
                 <label for="nome">Nome*</label>
