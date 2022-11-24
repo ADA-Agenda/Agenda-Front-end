@@ -2,7 +2,11 @@ import { Contatos } from "./src/scripts/pages/contatos.page.js";
 import { CriarConta } from "./src/scripts/pages/criar-conta.page.js";
 import { Login } from "./src/scripts/pages/login.page.js";
 import { CriarContato } from "./src/scripts/pages/criar-contato.page.js";
+<<<<<<< HEAD
 import { EditarContato } from "./src/scripts/pages/editar-contato.page.js"
+=======
+import { EditarContato } from "./src/scripts/pages/editar-contato.page.js";
+>>>>>>> ecfb9bb4eb43a5ccb7d1bc02e985ed4715c89133
 
 function redirectPages() {
     const root = document.getElementById('root')

@@ -16,6 +16,7 @@ const getContacts = async () => {
     const response = await ContactGet()
 
     if(response.status === 200){
+        
         populateList(response.data)
         createSearchArea()
         data = response.data
@@ -70,14 +71,26 @@ const editContac = (id) => {
 const createSearchArea = () => {
 
     const menu = `
-            <input type="text" id="search" placeholder="Buscar contato">
-            <button class="btn-busca">
-                Buscar
-            </button>
+            <div class="search_container">
+                <div>
+                    <input type="text" id="search" placeholder="Buscar contato">
+                    <button class="btn-busca">
+                        Buscar  
+                    </button>
+                </div>
+                <div>
+                    <button class="btn-todos">
+                        Todos
+                    </button>
+                </div>
+            </div>
             `
     contacts.insertAdjacentHTML('beforeend', menu)  
+
     const btnSearch = document.querySelector('.btn-busca')
     btnSearch.addEventListener('click', searchContact)
+    const btnAllContacts = document.querySelector('.btn-todos')
+    btnAllContacts.addEventListener('click', searchAllContacts)
 }
 
 
@@ -104,6 +117,13 @@ const searchContact = () =>{
 
     inputSearch.value=""
 }
+
+
+const searchAllContacts = () => {
+    contactsContainer.innerHTML = " ";
+    populateList(data)
+}
+
 
 export const Contatos = () => {
     const header = Header()
