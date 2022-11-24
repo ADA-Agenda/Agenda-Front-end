@@ -1,3 +1,67 @@
+
+.search_container{
+    width: 700px;
+    display: flex;
+    justify-content: center;
+    margin: 150px auto 0;
+    /* background-color: red; */
+    gap: 0 40px;
+}
+
+.search_container :nth-child(1){
+    display: flex;
+    width: 100%;
+}
+
+.search_container input{
+    width: 100%;
+    height: 40px;
+    border-radius: 12px 0 0 12px;
+    border: none;
+    color: #D3CED8;
+    background-color: rgb(233, 233, 233);
+    background-color: #535068;
+    outline: none;
+    padding: 16px;
+    font-size: 1.6rem;
+}
+
+
+.search_container .btn-busca{
+    width: 80px;
+    border: none;
+    border-radius: 0 12px 12px 0;
+    cursor: pointer;
+    font-size: 16px;
+    /* padding: 0 15px; */
+    background-color: #F9D71D;
+    background-color: #302F3D;
+    background-color: #8502D1;
+    color: #D3CED8;
+}
+
+
+
+.search_container .btn-todos{
+    width: 80px;
+    height: 100%;
+    text-align: center;
+    border: 1px solid #dfbf09;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    background-color: #8502D1;
+    background-color: #dfbf09;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.search_container .btn-busca i{
+   
+}
+
 #btn__criar{
     font-size: 1.6rem;
     color: black;
