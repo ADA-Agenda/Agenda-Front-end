@@ -109,6 +109,9 @@ export const Contatos = () => {
     const header = Header()
     root.append(header)
 
+    contacts.innerHTML = ''
+    contactsContainer.innerHTML = ''
+
     contacts.appendChild(contactsContainer)
     
     getContacts()
