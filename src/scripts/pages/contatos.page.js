@@ -44,8 +44,11 @@ const populateList = contactsArray => {
                 </div>
             </div>
             <div class="contacts__options">
-                <button>
+                <button class="delete-button">
                     <i class="fa fa-trash"></i>
+                </button>
+                <button class="edit-button" id="${contact.id}" name="hype">
+                    <i class="fa fa-edit"></i>
                 </button>
             </div>
         </div>
@@ -54,11 +57,19 @@ const populateList = contactsArray => {
     const listHtml = arrayList.join(" ");
     contactsContainer.insertAdjacentHTML("beforeend", listHtml);
 
-    const buttons = document.querySelectorAll('.contacts__options button')
+    const buttons = document.querySelectorAll('.contacts__options button.delete-button')
     buttons.forEach(b => b.addEventListener('click', deleteContact))
+
+    const editButton = document.querySelectorAll('.contacts__options button.edit-button')
+    editButton.forEach(b => b.addEventListener('click', () => editContac(b.id))) 
 }
 
 
+const editContac = (id) => {
+    sessionStorage.setItem("@contactId", `${id}`)
+    console.log(id)
+    window.open('#editar-contato', '_self')    
+}
 
 const createSearchArea = () => {
 

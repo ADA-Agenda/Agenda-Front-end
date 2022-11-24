@@ -4,7 +4,6 @@
     display: flex;
     justify-content: center;
     margin: 150px auto 0;
-    /* background-color: red; */
     gap: 0 40px;
 }
 
@@ -138,6 +137,11 @@
     gap: 0 12px;
 }
 
+.contacts__options{
+    display: flex;
+    gap: 10px;
+}
+
 
 .contacts__options button{
     background-color: #302F3D;
@@ -148,6 +152,8 @@
     height: 35px;
     display: flex;
     justify-content: center;
+    align-items: center;
     border-radius: 50%;
     cursor: pointer;
+    padding: 10px;
 }
