@@ -100,7 +100,7 @@ export const CriarContato = () => {
         </div>
 
         <div class="big_box">
-            <button type="submit" id="btn_criarContato" form="p-create">Criar</button>
+            <button type="submit" id="btn_criarContato" form="p-create">Atualizar</button>
         </div>
     `)
 
