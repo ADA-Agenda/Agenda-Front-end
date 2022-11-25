@@ -9,6 +9,18 @@ export const ContactGet = async () => {
 
     const token = sessionStorage.getItem("@token")
     headers.append('Authorization', token)
+
+    const response = await fetch(baseUrl + 'contact', { headers, method: "GET" })
+    return await response.json()
+}
+
+export const ContactGetById = async () => {
+    const headers = new Headers()
+    headers.append('Content-Type', 'application/json')  
+
+    const token = sessionStorage.getItem("@token")
+    headers.append('Authorization', token)
+
     const response = await fetch(baseUrl + 'contact', { headers, method: "GET" })
     return await response.json()
 }
@@ -17,13 +29,14 @@ export const ContactGet = async () => {
 export const ContactPost = async (formData) => {
     const headers = new Headers()
     headers.append('Content-Type', 'application/json')
+
     const token = sessionStorage.getItem("@token");
     headers.append('Authorization', token);
+
     const contato = ArrangeObject(formData);
     const body = JSON.stringify(contato);
     const response = await fetch(baseUrl + 'contact', { body, headers, method: "POST" })
     return await response.json()
-
 }
 
 
@@ -39,7 +52,6 @@ export const ContactPatch = async (formData) => {
     const body = JSON.stringify(contato);
     const response = await fetch(baseUrl + 'contact', { body, headers, method: "PATCH" })
     return await response.json()
-
 }
 
 
@@ -48,6 +60,7 @@ function ArrangeObject(formData) {
     const entries = Object.fromEntries(formData);
 
     const contato = {
+        idContato: entries.idContato,
         nome: entries.nome,
         apelido:entries.apelido,
         telefones:[{tipo:"celular", numero: entries.celular}, {tipo:"casa", numero: entries.casa} ,{tipo:"trabalho", numero: entries.trabalho} ],

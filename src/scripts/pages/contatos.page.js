@@ -62,13 +62,20 @@ const populateList = contactsArray => {
 
     const editButton = document.querySelectorAll('.contacts__options button.edit-button')
     editButton.forEach(b => b.addEventListener('click', () => editContac(b.id))) 
-}
 
+    const contactDiv = document.querySelectorAll('.contacts__card')
+    contactDiv.forEach(card => card.addEventListener('click', () => showContac(card.id))) 
+}
 
 const editContac = (id) => {
     sessionStorage.setItem("@contactId", `${id}`)
-    console.log(id)
     window.open('#editar-contato', '_self')    
+}
+
+const showContac = (id) => {
+    sessionStorage.setItem("@contactId", `${id}`)
+    console.log(id)
+    window.open('#contato-unico', '_self')    
 }
 
 const createSearchArea = () => {
