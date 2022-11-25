@@ -30,7 +30,7 @@ const populateList = contactsArray => {
     const arrayList = contactsArray.map((contact)=>{
         return `
         <div class="contacts__card" id="${contact.id}">
-            <div>
+            <div class="photo-name" id="${contact.id}">
                 <div class="contacts__img">
                     <img src="data:image/jpeg;base64,${contact.foto}" alt="Foto do contato">
                 </div>
@@ -61,12 +61,22 @@ const populateList = contactsArray => {
 
     const editButton = document.querySelectorAll('.contacts__options button.edit-button')
     editButton.forEach(b => b.addEventListener('click', () => editContac(b.id))) 
+
+    const contactDiv = document.querySelectorAll('.photo-name')
+    contactDiv.forEach(card => card.addEventListener('click', () => showContac(card.id))) 
 }
 
 
 const editContac = (id) => {
     sessionStorage.setItem("@contactId", `${id}`)
     window.open('#editar-contato', '_self')    
+}
+
+
+const showContac = (id) => {
+    /* console.log(id) */
+    sessionStorage.setItem("@contactId", `${id}`)
+    window.open('#contato-unico', '_self')    
 }
 
 const createSearchArea = () => {

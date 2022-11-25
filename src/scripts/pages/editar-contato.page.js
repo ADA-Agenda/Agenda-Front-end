@@ -29,7 +29,9 @@ export const EditarContato = () => {
             <h1>
                 Editar Contato
             </h1>
-            <a href="#contatos"><i class="fa fa-solid fa-reply"></i></a>
+            <a href="#contatos">
+                <i class="fa fa-solid fa-reply">
+            </i></a>
         </div>
 
         <div class="big_box">
@@ -107,7 +109,8 @@ export const EditarContato = () => {
         </div>
 
         <div class="big_box">
-            <button type="submit" id="btn_criarContato" form="p-create">Criar</button>
+            <button type="submit" id="btn_criarContato" form="p-create">Atualizar</button>
+            <button type="button" onclick="window.open('#contatos', '_self')" id="btn_cancelar" form="p-create">Cancelar</button>
         </div>
     `)
 

@@ -1,0 +1,15 @@
+.container-contato{
+    display: flex;
+    color: azure;
+    font-size: 2rem;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.container-contato p {
+    margin-bottom: 1rem;
+    background-color: #8502D1;
+    padding: .5em;
+    border-radius: 15px;
+}

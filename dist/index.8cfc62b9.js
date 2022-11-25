@@ -537,6 +537,7 @@ var _criarContaPageJs = require("./src/scripts/pages/criar-conta.page.js");
 var _loginPageJs = require("./src/scripts/pages/login.page.js");
 var _criarContatoPageJs = require("./src/scripts/pages/criar-contato.page.js");
 var _editarContatoPageJs = require("./src/scripts/pages/editar-contato.page.js");
+var _contatoUnicoPageJs = require("./src/scripts/pages/contato-unico.page.js");
 function redirectPages() {
     const root = document.getElementById("root");
     const Router = {
@@ -551,6 +552,10 @@ function redirectPages() {
         "#contatos": {
             component: (0, _contatosPageJs.Contatos),
             path: "#contatos"
+        },
+        "#contato-unico": {
+            component: (0, _contatoUnicoPageJs.ContatoUnico),
+            path: "#contato-unico"
         },
         "#criar-contato": {
             component: (0, _criarContatoPageJs.CriarContato),
@@ -578,7 +583,7 @@ window.addEventListener("load", ()=>{
     window.addEventListener("hashchange", redirectPages);
 });
 
-},{"./src/scripts/pages/contatos.page.js":"7prdI","./src/scripts/pages/criar-conta.page.js":"6gShC","./src/scripts/pages/login.page.js":"2wcBy","./src/scripts/pages/criar-contato.page.js":"8mPTj","./src/scripts/pages/editar-contato.page.js":"cldWW"}],"7prdI":[function(require,module,exports) {
+},{"./src/scripts/pages/contatos.page.js":"7prdI","./src/scripts/pages/criar-conta.page.js":"6gShC","./src/scripts/pages/login.page.js":"2wcBy","./src/scripts/pages/criar-contato.page.js":"8mPTj","./src/scripts/pages/editar-contato.page.js":"cldWW","./src/scripts/pages/contato-unico.page.js":"6Rmzk"}],"7prdI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Contatos", ()=>Contatos);
@@ -603,7 +608,7 @@ const populateList = (contactsArray)=>{
     const arrayList = contactsArray.map((contact)=>{
         return `
         <div class="contacts__card" id="${contact.id}">
-            <div>
+            <div class="photo-name" id="${contact.id}">
                 <div class="contacts__img">
                     <img src="data:image/jpeg;base64,${contact.foto}" alt="Foto do contato">
                 </div>
@@ -632,10 +637,16 @@ const populateList = (contactsArray)=>{
     buttons.forEach((b)=>b.addEventListener("click", ()=>deleteContact(b.id)));
     const editButton = document.querySelectorAll(".contacts__options button.edit-button");
     editButton.forEach((b)=>b.addEventListener("click", ()=>editContac(b.id)));
+    const contactDiv = document.querySelectorAll(".photo-name");
+    contactDiv.forEach((card)=>card.addEventListener("click", ()=>showContac(card.id)));
 };
 const editContac = (id)=>{
     sessionStorage.setItem("@contactId", `${id}`);
     window.open("#editar-contato", "_self");
+};
+const showContac = (id)=>{
+    /* console.log(id) */ sessionStorage.setItem("@contactId", `${id}`);
+    window.open("#contato-unico", "_self");
 };
 const createSearchArea = ()=>{
     const menu = `
@@ -764,6 +775,7 @@ exports.export = function(dest, destName, get) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "ContactGet", ()=>ContactGet);
+parcelHelpers.export(exports, "ContactGetById", ()=>ContactGetById);
 parcelHelpers.export(exports, "ContactPost", ()=>ContactPost);
 parcelHelpers.export(exports, "ContactPatch", ()=>ContactPatch);
 parcelHelpers.export(exports, "ContactDelete", ()=>ContactDelete);
@@ -776,6 +788,18 @@ const token = sessionStorage.getItem("@token");
 headers.append("Authorization", token);
 const ContactGet = async ()=>{
     const response = await fetch(baseUrl + "contact", {
+        headers,
+        method: "GET"
+    });
+    return await response.json();
+};
+const ContactGetById = async ()=>{
+    /*     const headers = new Headers()
+    headers.append('Content-Type', 'application/json')  
+
+    const token = sessionStorage.getItem("@token")
+    headers.append('Authorization', token) */ const id = sessionStorage.getItem("@contactId");
+    const response = await fetch(baseUrl + "contact/" + id, {
         headers,
         method: "GET"
     });
@@ -1480,7 +1504,9 @@ const EditarContato = ()=>{
             <h1>
                 Editar Contato
             </h1>
-            <a href="#contatos"><i class="fa fa-solid fa-reply"></i></a>
+            <a href="#contatos">
+                <i class="fa fa-solid fa-reply">
+            </i></a>
         </div>
 
         <div class="big_box">
@@ -1558,13 +1584,67 @@ const EditarContato = ()=>{
         </div>
 
         <div class="big_box">
-            <button type="submit" id="btn_criarContato" form="p-create">Criar</button>
+            <button type="submit" id="btn_criarContato" form="p-create">Atualizar</button>
+            <button type="button" onclick="window.open('#contatos', '_self')" id="btn_cancelar" form="p-create">Cancelar</button>
         </div>
     `;
     events();
     return formCreate;
 };
 
-},{"../services/contact.service.js":"bHr4j","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["2mNKm","6rimH"], "6rimH", "parcelRequire3316")
+},{"../services/contact.service.js":"bHr4j","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6Rmzk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ContatoUnico", ()=>ContatoUnico);
+var _headerComponentJs = require("../components/header.component.js");
+var _contactServiceJs = require("../services/contact.service.js");
+const root = document.getElementById("root");
+const contacts = document.createElement("div");
+contacts.setAttribute("id", "p-contacts");
+const contactsContainer = document.createElement("div");
+contactsContainer.setAttribute("class", "contacts__container");
+const getContact = async ()=>{
+    const response = await (0, _contactServiceJs.ContactGetById)();
+    if (response.status === 200) {
+        console.log("status 200");
+        renderContact(response.data);
+    } else console.log("erro");
+};
+const renderContact = (contact)=>{
+    const contactHtml = `
+        <div class="container-contato">
+        <div class="contato-photo">
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Foto do contato">
+        </div>
+        <div class="contato-dados">
+            <p>Nome: ${contact.nome}</p>
+            <p>Apelido: ${contact.apelido}</p>
+            <p>Email: ${contact.email}</p>
+            <p>Notas: ${contact.notas}</p>
+        </div>
+
+        <div class="contato-dados">
+            <p>Telefone celular: ${contact.telefones[0].numero}</p>
+            <p>Telefone residencial: ${contact.telefones[1].numero}</p>
+            <p>Telefone trabalho: ${contact.telefones[2].numero}</p>
+            <p>Endereço: ${contact.endereco.logradouro} ${contact.endereco.cidade} ${contact.endereco.estado} ${contact.endereco.cep} ${contact.endereco.pais} </p>
+            
+        </div>
+    </div>
+
+        `;
+    contactsContainer.insertAdjacentHTML("beforeend", contactHtml);
+};
+const ContatoUnico = ()=>{
+    const header = (0, _headerComponentJs.Header)();
+    root.append(header);
+    contacts.innerHTML = " ";
+    contactsContainer.innerHTML = " ";
+    contacts.appendChild(contactsContainer);
+    getContact();
+    return contacts;
+};
+
+},{"../components/header.component.js":"5Zcf5","../services/contact.service.js":"bHr4j","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["2mNKm","6rimH"], "6rimH", "parcelRequire3316")
 
 //# sourceMappingURL=index.8cfc62b9.js.map

@@ -14,6 +14,19 @@ export const ContactGet = async () => {
 }
 
 
+export const ContactGetById = async () => {
+/*     const headers = new Headers()
+    headers.append('Content-Type', 'application/json')  
+
+    const token = sessionStorage.getItem("@token")
+    headers.append('Authorization', token) */
+
+    const id = sessionStorage.getItem("@contactId")
+
+    const response = await fetch(baseUrl + 'contact/' + id, { headers, method: "GET" })
+    return await response.json()
+}
+
 export const ContactPost = async (formData) => {
     const contato = await ArrangeObject(formData);
     const body = JSON.stringify(contato);
