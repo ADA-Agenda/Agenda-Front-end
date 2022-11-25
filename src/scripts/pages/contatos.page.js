@@ -123,7 +123,7 @@ const exportContactsToCsv = async () => {
     }
 }
 
-function generateCsv(contacts) {
+const generateCsv = (contacts) => {
     let csv = 'fn,ln,email,phone'
 
     contacts.forEach((contact, index, array) => {

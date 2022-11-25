@@ -7,8 +7,13 @@ headers.append('Content-Type', 'application/json')
 const token = sessionStorage.getItem("@token");
 headers.append('Authorization', token);
 
+function refreshToken() {
+    headers.set('Authorization', sessionStorage.getItem("@token"))
+}
+
 
 export const ContactGet = async () => {
+    refreshToken()
     const response = await fetch(baseUrl + 'contact', { headers, method: "GET" })
     return await response.json()
 }
