@@ -21,7 +21,9 @@ export const ContactGetById = async () => {
     const token = sessionStorage.getItem("@token")
     headers.append('Authorization', token)
 
-    const response = await fetch(baseUrl + 'contact', { headers, method: "GET" })
+    const id = sessionStorage.getItem("@contactId")
+
+    const response = await fetch(baseUrl + 'contact/' + id, { headers, method: "GET" })
     return await response.json()
 }
 

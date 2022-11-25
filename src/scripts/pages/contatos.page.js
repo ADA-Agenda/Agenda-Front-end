@@ -31,7 +31,7 @@ const populateList = contactsArray => {
     const arrayList = contactsArray.map((contact)=>{
         return `
         <div class="contacts__card" id="${contact.id}">
-            <div>
+            <div class="photo-name">
                 <div class="contacts__img">
                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Foto do contato">
                 </div>
@@ -63,7 +63,7 @@ const populateList = contactsArray => {
     const editButton = document.querySelectorAll('.contacts__options button.edit-button')
     editButton.forEach(b => b.addEventListener('click', () => editContac(b.id))) 
 
-    const contactDiv = document.querySelectorAll('.contacts__card')
+    const contactDiv = document.querySelectorAll('.photo-name')
     contactDiv.forEach(card => card.addEventListener('click', () => showContac(card.id))) 
 }
 

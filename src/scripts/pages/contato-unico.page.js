@@ -15,12 +15,12 @@ const getContact = async () => {
 
     if(response.status === 200){
         
-        populateList(response.data)
+        renderContact(response.data)
     } 
 }
 
 
-const populateList = contactsArray => {
+const renderContact = contactsArray => {
 
     const arrayList = contactsArray.map((contact)=>{
         return `
@@ -50,19 +50,6 @@ const populateList = contactsArray => {
     })
     const listHtml = arrayList.join(" ");
     contactsContainer.insertAdjacentHTML("beforeend", listHtml);
-
-    const buttons = document.querySelectorAll('.contacts__options button.delete-button')
-    buttons.forEach(b => b.addEventListener('click', deleteContact))
-
-    const editButton = document.querySelectorAll('.contacts__options button.edit-button')
-    editButton.forEach(b => b.addEventListener('click', () => editContac(b.id))) 
-}
-
-
-const editContac = (id) => {
-    sessionStorage.setItem("@contactId", `${id}`)
-    console.log(id)
-    window.open('#editar-contato', '_self')    
 }
 
 
