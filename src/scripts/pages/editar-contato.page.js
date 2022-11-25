@@ -10,8 +10,9 @@ const editarContato = async (event) => {
     const response = await ContactPatch(fd)
 
     if(response.status === 200) {
-        window.open('#contatos', '_self')
         window.alert("Contato Atualizado com Sucesso!")
+        window.open('#contatos', '_self')
+        
     }
     else
     {
@@ -32,9 +33,7 @@ export const EditarContato = () => {
         <div class="big_box">
             <h3>Contato</h3>
             <div class="form_idContato">
-
-                <label for="idContato">Id do contato</label>
-                <input id="idContato" name="idContato" value="${sessionStorage.getItem("@contactId")}">
+                <input type="hidden" id="idContato" name="idContato" value="${sessionStorage.getItem("@contactId")}">
             </div>
             <div class="form_nome">
 
@@ -105,7 +104,8 @@ export const EditarContato = () => {
         </div>
 
         <div class="big_box">
-            <button type="submit" id="btn_criarContato" form="p-create">Criar</button>
+            <button type="submit" id="btn_criarContato" form="p-create">Atualizar</button>
+            <button type="button" onclick="window.open('#contatos', '_self')" id="btn_cancelar" form="p-create">Cancelar</button>
         </div>
     `)
 
