@@ -151,7 +151,6 @@ function generateCsv(contacts) {
     return csv
 }
 
-
 const download = function (data) {
     const blob = new Blob([data], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob)
@@ -159,19 +158,6 @@ const download = function (data) {
     a.setAttribute('href', url)
     a.setAttribute('download', 'contatos.csv');
     a.click()
-}
- 
-const get = async function () {
- 
-    // JavaScript object
-    const data = {
-        id: 1,
-        name: "Geeks",
-        profession: "developer"
-    }
- 
-    const csvdata = csvmaker(data);
-    download(csvdata);
 }
 
 const deleteContact =  async (id) =>{
