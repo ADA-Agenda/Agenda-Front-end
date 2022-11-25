@@ -1,0 +1,27 @@
+{
+  "name": "projeto-agenda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "source": "index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ADA-Agenda/Agenda-Front-end.git"
+  },
+  "author": "Grupo 3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ADA-Agenda/Agenda-Front-end/issues"
+  },
+  "homepage": "https://github.com/ADA-Agenda/Agenda-Front-end#readme",
+  "devDependencies": {
+    "parcel": "^2.8.0"
+  },
+  "dependencies": {
+    "compress.js": "^1.2.2"
+  }
+}

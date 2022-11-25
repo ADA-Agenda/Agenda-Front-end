@@ -17,12 +17,23 @@ function redirectPages() {
     }
 
     let route;
+    const token = sessionStorage.getItem("@token")
 
     if(window.location.hash === "") {
         route = Router["#login"]
     }
     else {
         route = Router[window.location.hash] || Router['#404']
+
+        // se é rota logada mas ta sem o token, manda pro login
+        /* if(route.logged && !token) {
+            route = Router['#login']
+        } */
+
+        // se é rota não logada (login, criar conta) e tem token, não deixa acessar, manda pra contatos
+        /* if(!route.logged && token) {
+            route = Router['#contatos']
+        } */
     }
 
     root.innerHTML = null

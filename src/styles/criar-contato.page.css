@@ -1,60 +1,74 @@
-#btn_criarContato{
-    width: 100%;
-    height: 48px;
-    background-color: #6f49b6;
-    border-radius: 8px;
-    margin: 32px 0 0;
-    font-weight: 600;
-    font-size: 1.6rem;
-    line-height: 24px;
-    color: #FFFFFF;
-    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
-    border: none;
-    cursor: pointer;
+.form_header{
+  display: flex;
 }
+
+.form_header i{
+  color: white;
+  font-size: 2.4rem;
+  cursor: pointer;
+}
+
+#btn_criarContato{
+  width: 100%;
+  height: 48px;
+  background-color: #6f49b6;
+  border-radius: 8px;
+  margin: 32px 0 0;
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 24px;
+  color: #FFFFFF;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
+  border: none;
+  cursor: pointer;
+}
+
 #p-create h1{
-    font-weight: 600;
-    font-size: 3.2rem;
-    line-height: 4rem;
-    color: #8657DB;
-    align-self: center;
-    margin: 0 0 30px;
-    width: 1200px;
-  }
+  font-weight: 600;
+  font-size: 3.2rem;
+  line-height: 4rem;
+  color: #8657DB;
+  align-self: center;
+  margin: 0 0 30px;
+  width: 1200px;
+}
 
 h1 a{
-  color: white;
-  margin-left: 100px;
+color: white;
+margin-left: 100px;
 }
 
 #p-create{
-  display: block;
-    background-color: #302F3D;
-    border-radius: 1.6rem;
-    padding: 4.8rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1000px;
-}
-.big_box{
-  width: 45%;
-  float: left;
-  margin-right: 4rem;
-}
-h3{
-  font-style: normal;
-  font-weight: bold;
-  font-size: 2.0rem;
-  line-height: 16px;
-  letter-spacing: -0.005em;
-  color: rgb(214, 211, 211);
-  text-align: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
+display: block;
+  background-color: #302F3D;
+  border-radius: 1.6rem;
+  padding: 4.8rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
 }
 
+.big_box{
+width: 45%;
+float: left;
+margin-right: 4rem;
+}
+
+h3{
+font-style: normal;
+font-weight: bold;
+font-size: 2.0rem;
+line-height: 16px;
+letter-spacing: -0.005em;
+color: rgb(214, 211, 211);
+text-align: center;
+margin-top: 15px;
+margin-bottom: 15px;
+}
+
+.form_idContato,
 .form_nome,
 .form_email,
 .form_apelido,
@@ -89,7 +103,8 @@ h3{
   color:   rgb(214, 211, 211);
   outline: none;
 }
-  
+
+.form_idContato input,
 .form_nome input,
 .form_email input,
 .form_apelido input,
@@ -116,6 +131,7 @@ h3{
   outline: none;
 }
 
+.form_idContato label,
 .form_nome label,
 .form_email label,
 .form_apelido label,
@@ -138,22 +154,22 @@ h3{
   color: rgb(214, 211, 211);
 }
 
-  
-#btn_criarContato:hover{
-  background-color: #8657DB;
-}
-  
-  
-@media screen and (max-width: 768px) {
-    
-    #p-create{
-      width: 328px;
-      max-width: 500px;
-      border-radius: 8px;
-      padding-top: 32px;
-    }
 
-    #p-create h1{
-      font-size: 2.4rem;     
-    }
+#btn_criarContato:hover{
+background-color: #8657DB;
+}
+
+
+@media screen and (max-width: 768px) {
+  
+  #p-create{
+    width: 328px;
+    max-width: 500px;
+    border-radius: 8px;
+    padding-top: 32px;
+  }
+
+  #p-create h1{
+    font-size: 2.4rem;     
+  }
 }

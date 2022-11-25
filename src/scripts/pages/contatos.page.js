@@ -5,7 +5,7 @@ const root = document.getElementById('root')
 
 const contacts = document.createElement('div')
 contacts.setAttribute('id', 'p-contacts')
-/* contacts.setAttribute('class', 'contacts__container') */
+contacts.setAttribute('class', 'p_container')
 
 const contactsContainer = document.createElement('div')
 contactsContainer.setAttribute('class', 'contacts__container')
@@ -18,7 +18,6 @@ const getContacts = async () => {
     const response = await ContactGet()
 
     if(response.status === 200){
-        
         populateList(response.data)
         createSearchArea()
         data = response.data
@@ -33,7 +32,7 @@ const populateList = contactsArray => {
         <div class="contacts__card" id="${contact.id}">
             <div>
                 <div class="contacts__img">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Foto do contato">
+                    <img src="data:image/jpeg;base64,${contact.foto}" alt="Foto do contato">
                 </div>
                 <div class="contacts__data">
                     <p>${contact.nome}</p>
@@ -67,7 +66,6 @@ const populateList = contactsArray => {
 
 const editContac = (id) => {
     sessionStorage.setItem("@contactId", `${id}`)
-    console.log(id)
     window.open('#editar-contato', '_self')    
 }
 
@@ -91,10 +89,11 @@ const createSearchArea = () => {
                 </div>
             </div>
             `
-    contacts.insertAdjacentHTML('beforeend', menu)  
+    contacts.insertAdjacentHTML('afterbegin', menu)  
 
     const btnSearch = document.querySelector('.btn-busca')
     btnSearch.addEventListener('click', searchContact)
+    
     const btnAllContacts = document.querySelector('.btn-todos')
     btnAllContacts.addEventListener('click', searchAllContacts)
 }
@@ -102,9 +101,17 @@ const createSearchArea = () => {
 
 
 const deleteContact =  async (id) =>{
-    
     const resp = await ContactDelete(id)
-    console.log(resp);
+
+    if(resp.status === 200){
+        const response = await ContactGet()
+        contactsContainer.innerHTML = " ";
+
+        if(response.status === 200){
+            populateList(response.data)
+            data = response.data
+        } 
+    }
 }
 
 
@@ -132,6 +139,10 @@ const searchAllContacts = () => {
     populateList(data)
 }
 
+const events = () => {
+    window.addEventListener('load', getContacts)
+}
+
 
 export const Contatos = () => {
     const header = Header()
@@ -143,5 +154,6 @@ export const Contatos = () => {
     contacts.appendChild(contactsContainer)
     
     getContacts()
+    events()
     return contacts
 }

@@ -11,24 +11,3 @@ export const AuthPost = async (formData) => {
     const response = await fetch(baseUrl + 'auth', { body, headers, method: "POST" })
     return await response.json()
 }
-
-
-// AuthPost(fd)
-//     .then((response) => {
-//         console.log(response);
-
-//         if (response.status !== 200) {
-//             window.alert('Deu ruim!')
-//         }
-//         else {
-//             window.alert('Entrou na aplicação')
-//             return response.json()
-//         }
-//     })
-//     .then((resp) => {
-//         console.log(resp);
-//     })
-//     .catch((error) => {
-//         console.log(error);
-//         window.alert('Deu ruim!')
-//     })

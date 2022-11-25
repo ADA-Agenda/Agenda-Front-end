@@ -5,7 +5,7 @@ header.setAttribute('id', 'c-header')
 const sair = () => {
     sessionStorage.clear()
     window.open('#login', '_self')
-    console.log("saiu");
+    /* console.log("saiu"); */
 }
 
 
@@ -18,7 +18,10 @@ export const Header = () => {
     const user = JSON.parse(sessionStorage.getItem('@user'))
 
     header.innerHTML = `
-        <label>${user?.nome}</label>
+        <div>
+            <img src="data:image/jpeg;base64,${user.foto}">
+            <label>${user?.nome}</label>
+        </div>
         <button id="sair">Sair</button>
     `
     events()

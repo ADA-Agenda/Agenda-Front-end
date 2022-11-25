@@ -4,8 +4,15 @@
     align-items: center;
     background: #8502D1;
     color: azure;
-    padding: 14px;
+    padding: 14px 80px;
     font-size: 2.2rem;
+}
+
+#c-header div img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
 }
 
 #c-header button {
@@ -17,3 +24,9 @@
     font-size: 1.8rem;
 }
 
+@media screen and (max-width: 768px) {
+
+    #c-header {
+        padding: 14px 30px;
+    }
+}

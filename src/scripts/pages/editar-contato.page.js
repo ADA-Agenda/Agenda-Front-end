@@ -25,14 +25,16 @@ const events = () => {
 
 export const EditarContato = () => {
     formCreate.innerHTML = (`
-        <h1>
-            Editar Contato <a id="btn__criar" href="#contatos">Voltar</a>
-        </h1>
+        <div class="form_header">
+            <h1>
+                Editar Contato
+            </h1>
+            <a href="#contatos"><i class="fa fa-solid fa-reply"></i></a>
+        </div>
 
         <div class="big_box">
             <h3>Contato</h3>
             <div class="form_idContato">
-
                 <label for="idContato">Id do contato</label>
                 <input id="idContato" name="idContato" value="${sessionStorage.getItem("@contactId")}">
             </div>

@@ -1,5 +1,4 @@
-import { ContactPost } from "../services/contact.service.js"
-
+import { ContactPost } from "../services/contact.service.js";
 
 const formCreate = document.createElement('form')
 formCreate.setAttribute('id', 'p-create')
@@ -8,6 +7,7 @@ const criarContato = async (event) => {
     event.preventDefault()
     const fd = new FormData(formCreate)
     const response = await ContactPost(fd)
+    /* console.log(response); */
 
     if(response.status === 200) {
         window.open('#contatos', '_self')
@@ -25,15 +25,19 @@ const events = () => {
 }
 
 export const CriarContato = () => {
-    formCreate.innerHTML = (`
-        <h1>
-            Registrar novo Contato <a id="btn__criar" href="#contatos">Voltar</a>
-        </h1>
 
+    formCreate.innerHTML = (`
+        <div class="form_header">
+            <h1>
+                Registrar novo Contato 
+            </h1>
+            <a href="#contatos"><i class="fa fa-solid fa-reply"></i></a>
+        </div>
+    
         <div class="big_box">
             <h3>Contato</h3>
             <div class="form_nome">
-
+    
                 <label for="nome">Nome*</label>
                 <input id="nome" name="nome" required>
             </div>
@@ -41,7 +45,7 @@ export const CriarContato = () => {
                 <label for="apelido">Apelido</label>
                 <input id="apelido" name="apelido">
             </div>
-
+    
             <div class="form_email">
                 <label for="email">Email</label>
                 <input id="email" name="email">
@@ -56,17 +60,17 @@ export const CriarContato = () => {
             </div>
             <div class="div_telefone">
                 <h3>Telefones</h3>
-
+    
                 <div class="form_celular_numero">
                     <label for="celular">Celular: </label>
                     <input id="celular" name="celular" placeholder="(xx) xxxxxxxxx">
                 </div>
-
+    
                 <div class="form_Casa_numero">
                     <label for="casa">Casa: </label>
                     <input id="casa" name="casa" placeholder="(xx) xxxxxxxx">
                 </div>
-
+    
                 <div class="form_Trabalho_numero">
                     <label for="trabalho">Trabalho: </label>
                     <input id="trabalho" name="trabalho" placeholder="(xx) xxxxxxxx">
@@ -99,10 +103,11 @@ export const CriarContato = () => {
                 </div>
             </div>
         </div>
-
+    
         <div class="big_box">
             <button type="submit" id="btn_criarContato" form="p-create">Criar</button>
         </div>
+
     `)
 
     events()
