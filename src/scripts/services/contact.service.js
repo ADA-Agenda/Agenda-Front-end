@@ -1,45 +1,37 @@
-
 const baseUrl = 'http://localhost:5000/v1/'
 
+const headers = new Headers()
+headers.append('Content-Type', 'application/json')
+const token = sessionStorage.getItem("@token");
+headers.append('Authorization', token);
 
 
 export const ContactGet = async () => {
-    const headers = new Headers()
-    headers.append('Content-Type', 'application/json')  
-
-    const token = sessionStorage.getItem("@token")
-    headers.append('Authorization', token)
     const response = await fetch(baseUrl + 'contact', { headers, method: "GET" })
     return await response.json()
 }
 
 
 export const ContactPost = async (formData) => {
-    const headers = new Headers()
-    headers.append('Content-Type', 'application/json')
-    const token = sessionStorage.getItem("@token");
-    headers.append('Authorization', token);
     const contato = ArrangeObject(formData);
     const body = JSON.stringify(contato);
     const response = await fetch(baseUrl + 'contact', { body, headers, method: "POST" })
     return await response.json()
-
 }
 
 
-
 export const ContactPatch = async (formData) => {
-    const headers = new Headers()
-    headers.append('Content-Type', 'application/json')
-
-    const token = sessionStorage.getItem("@token");
-    headers.append('Authorization', token);
-
     const contato = ArrangeObject(formData);
     const body = JSON.stringify(contato);
     const response = await fetch(baseUrl + 'contact', { body, headers, method: "PATCH" })
     return await response.json()
+}
 
+
+export const ContactDelete = async (id) => {
+    const body = JSON.stringify({idContato: id});
+    const response = await fetch(baseUrl + 'contact', { body, headers, method: "DELETE" })
+    return await response.json()
 }
 
 
@@ -63,6 +55,4 @@ function ArrangeObject(formData) {
         foto: ""
     }
     return contato;
-
 }
-

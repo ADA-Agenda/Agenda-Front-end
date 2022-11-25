@@ -1,5 +1,5 @@
 import { Header } from "./../components/header.component.js"
-import { ContactGet } from "../services/contact.service.js"
+import { ContactDelete, ContactGet } from "../services/contact.service.js"
 
 const root = document.getElementById('root')
 
@@ -44,7 +44,7 @@ const populateList = contactsArray => {
                 </div>
             </div>
             <div class="contacts__options">
-                <button class="delete-button">
+                <button class="delete-button" id="${contact.id}">
                     <i class="fa fa-trash"></i>
                 </button>
                 <button class="edit-button" id="${contact.id}" name="hype">
@@ -58,7 +58,7 @@ const populateList = contactsArray => {
     contactsContainer.insertAdjacentHTML("beforeend", listHtml);
 
     const buttons = document.querySelectorAll('.contacts__options button.delete-button')
-    buttons.forEach(b => b.addEventListener('click', deleteContact))
+    buttons.forEach(b => b.addEventListener('click', () => deleteContact(b.id)))
 
     const editButton = document.querySelectorAll('.contacts__options button.edit-button')
     editButton.forEach(b => b.addEventListener('click', () => editContac(b.id))) 
@@ -78,13 +78,16 @@ const createSearchArea = () => {
                 <div>
                     <input type="text" id="search" placeholder="Buscar contato">
                     <button class="btn-busca">
-                        Buscar  
+                        Buscar
                     </button>
                 </div>
                 <div>
                     <button class="btn-todos">
                         Todos
                     </button>
+                    <a class="btn-novo" href="#criar-contato" target="_self">
+                        Novo
+                    </a>
                 </div>
             </div>
             `
@@ -98,8 +101,10 @@ const createSearchArea = () => {
 
 
 
-const deleteContact = () =>{
-    console.log('DELETOU');
+const deleteContact =  async (id) =>{
+    
+    const resp = await ContactDelete(id)
+    console.log(resp);
 }
 
 
