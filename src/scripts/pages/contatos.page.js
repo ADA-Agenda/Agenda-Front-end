@@ -26,7 +26,6 @@ const getContacts = async () => {
 
 
 const populateList = contactsArray => {
-
     const arrayList = contactsArray.map((contact)=>{
         return `
         <div class="contacts__card" id="${contact.id}">
@@ -84,15 +83,19 @@ const createSearchArea = () => {
     const menu = `
             <div class="search_container">
                 <div>
+                // <button id="btnExportToCsv" class="btn-todos" style="margin-right: 10px;">
+                        Exportar
+                    </button>
                     <input type="text" id="search" placeholder="Buscar contato">
                     <button class="btn-busca">
                         Buscar
                     </button>
                 </div>
                 <div>
-                    <button class="btn-todos">
+                    <button id="btn-todos" class="btn-todos">
                         Todos
                     </button>
+                    
                     <a class="btn-novo" href="#criar-contato" target="_self">
                         Novo
                     </a>
@@ -104,11 +107,58 @@ const createSearchArea = () => {
     const btnSearch = document.querySelector('.btn-busca')
     btnSearch.addEventListener('click', searchContact)
     
-    const btnAllContacts = document.querySelector('.btn-todos')
+    const btnAllContacts = document.querySelector('#btn-todos')
     btnAllContacts.addEventListener('click', searchAllContacts)
+
+    const btnExportToCsv = document.querySelector('#btnExportToCsv')
+    btnExportToCsv.addEventListener('click', exportContactsToCsv)
 }
 
+const exportContactsToCsv = async () => {
+    const response = await ContactGet()
 
+    if(response.status === 200){
+        let csv = generateCsv(response.data)
+        download(csv)
+    }
+}
+
+function generateCsv(contacts) {
+    let csv = 'fn,ln,email,phone'
+
+    contacts.forEach((contact, index, array) => {
+        let fullName = contact.nome.trim()
+        let indexOfFirstWhiteSpace = fullName.indexOf(' ')
+        let fn
+        let ln
+
+        if (indexOfFirstWhiteSpace != -1) {
+            fn = fullName.substring(0, indexOfFirstWhiteSpace).trim()
+            ln = fullName.substring(indexOfFirstWhiteSpace + 1).trim()
+        }
+
+        else {
+            fn = fullName
+            ln = ''
+        }
+
+        let email = contact.email
+        let phone = contact.telefones[0].numero
+
+        csv += `\n${fn},${ln},${email},${phone}`
+    })
+
+    return csv
+}
+
+const download = function (data) {
+    const blob = new Blob([data], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.setAttribute('href', url)
+    a.setAttribute('download', 'contatos.csv');
+    a.click()
+}
 
 const deleteContact =  async (id) =>{
     const resp = await ContactDelete(id)
