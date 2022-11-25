@@ -1,0 +1,20 @@
+#c-footer {
+    min-height: 65px;
+    width: 100%;
+    background: #8502D1;
+    bottom: 0;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+#c-footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 20px;
+}
