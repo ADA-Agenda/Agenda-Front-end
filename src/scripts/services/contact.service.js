@@ -56,6 +56,7 @@ async function ArrangeObject(formData) {
     const entries = Object.fromEntries(formData);
 
     const contato = {
+        idContato: entries.idContato,
         nome: entries.nome,
         apelido:entries.apelido,
         telefones:[{tipo:"celular", numero: entries.celular}, {tipo:"casa", numero: entries.casa} ,{tipo:"trabalho", numero: entries.trabalho} ],
