@@ -66,13 +66,15 @@ const populateList = contactsArray => {
 }
 
 const editContac = (id) => {
+    console.log(id)
     sessionStorage.setItem("@contactId", `${id}`)
     window.open('#editar-contato', '_self')    
 }
 
 const showContac = (id) => {
-    sessionStorage.setItem("@contactId", `${id}`)
     console.log(id)
+    sessionStorage.setItem("@contactId", `${id}`)
+    
     window.open('#contato-unico', '_self')    
 }
 

@@ -14,16 +14,18 @@ const getContact = async () => {
     const response = await ContactGetById()
 
     if(response.status === 200){
-        
+        console.log("status 200")
         renderContact(response.data)
     } 
+    else{
+        console.log("erro")
+    }
 }
 
 
-const renderContact = contactsArray => {
+const renderContact = contact => {
 
-    const arrayList = contactsArray.map((contact)=>{
-        return `
+        const contactHtml = `
         <div class="contacts__card" id="${contact.id}">
             <div>
                 <div class="contacts__img">
@@ -37,19 +39,11 @@ const renderContact = contactsArray => {
                     </div>   
                 </div>
             </div>
-            <div class="contacts__options">
-                <button class="delete-button">
-                    <i class="fa fa-trash"></i>
-                </button>
-                <button class="edit-button" id="${contact.id}" name="hype">
-                    <i class="fa fa-edit"></i>
-                </button>
-            </div>
         </div>
         `
-    })
-    const listHtml = arrayList.join(" ");
-    contactsContainer.insertAdjacentHTML("beforeend", listHtml);
+        
+    contactsContainer.insertAdjacentHTML("beforeend", contactHtml);
+
 }
 
 
