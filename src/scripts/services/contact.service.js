@@ -15,12 +15,6 @@ export const ContactGet = async () => {
 
 
 export const ContactGetById = async () => {
-/*     const headers = new Headers()
-    headers.append('Content-Type', 'application/json')  
-
-    const token = sessionStorage.getItem("@token")
-    headers.append('Authorization', token) */
-
     const id = sessionStorage.getItem("@contactId")
 
     const response = await fetch(baseUrl + 'contact/' + id, { headers, method: "GET" })
@@ -51,7 +45,7 @@ export const ContactDelete = async (id) => {
 }
 
 
-async function ArrangeObject(formData) {
+function ArrangeObject(formData) {
 
     const entries = Object.fromEntries(formData);
 
@@ -72,14 +66,14 @@ async function ArrangeObject(formData) {
         foto: ""
     }
 
-    const foto = await fotoHandler(entries);
+    const foto = fotoHandler(entries);
     if(foto) contato.foto = foto.data;
 
     return contato;
 }
 
 
-const fotoHandler = async(entries) => {
+const fotoHandler = (entries) => {
     return new Promise((resolve,reject) =>{
         const compress = new Compress();
 

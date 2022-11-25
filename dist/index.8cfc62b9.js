@@ -652,15 +652,19 @@ const createSearchArea = ()=>{
     const menu = `
             <div class="search_container">
                 <div>
+                    <button id="btnExportToCsv" class="btn-todos" style="margin-right: 10px;">
+                        Exportar
+                    </button>
                     <input type="text" id="search" placeholder="Buscar contato">
                     <button class="btn-busca">
                         Buscar
                     </button>
                 </div>
                 <div>
-                    <button class="btn-todos">
+                    <button id="btn-todos" class="btn-todos">
                         Todos
                     </button>
+                    
                     <a class="btn-novo" href="#criar-contato" target="_self">
                         Novo
                     </a>
@@ -670,8 +674,49 @@ const createSearchArea = ()=>{
     contacts.insertAdjacentHTML("afterbegin", menu);
     const btnSearch = document.querySelector(".btn-busca");
     btnSearch.addEventListener("click", searchContact);
-    const btnAllContacts = document.querySelector(".btn-todos");
+    const btnAllContacts = document.querySelector("#btn-todos");
     btnAllContacts.addEventListener("click", searchAllContacts);
+    const btnExportToCsv = document.querySelector("#btnExportToCsv");
+    btnExportToCsv.addEventListener("click", exportContactsToCsv);
+};
+const exportContactsToCsv = async ()=>{
+    const response = await (0, _contactServiceJs.ContactGet)();
+    if (response.status === 200) {
+        let csv = generateCsv(response.data);
+        download(csv);
+    }
+};
+function generateCsv(contacts) {
+    let csv = "fn,ln,email,phone";
+    contacts.forEach((contact, index, array)=>{
+        let fullName = contact.nome.trim();
+        let indexOfFirstWhiteSpace = fullName.indexOf(" ");
+        let fn;
+        let ln;
+        if (indexOfFirstWhiteSpace != -1) {
+            fn = fullName.substring(0, indexOfFirstWhiteSpace).trim();
+            ln = fullName.substring(indexOfFirstWhiteSpace + 1).trim();
+        } else {
+            fn = fullName;
+            ln = "";
+        }
+        let email = contact.email;
+        let phone = contact.telefones[0].numero;
+        csv += `\n${fn},${ln},${email},${phone}`;
+    });
+    return csv;
+}
+const download = function(data) {
+    const blob = new Blob([
+        data
+    ], {
+        type: "text/csv"
+    });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.setAttribute("href", url);
+    a.setAttribute("download", "contatos.csv");
+    a.click();
 };
 const deleteContact = async (id)=>{
     const resp = await (0, _contactServiceJs.ContactDelete)(id);
@@ -794,11 +839,7 @@ const ContactGet = async ()=>{
     return await response.json();
 };
 const ContactGetById = async ()=>{
-    /*     const headers = new Headers()
-    headers.append('Content-Type', 'application/json')  
-
-    const token = sessionStorage.getItem("@token")
-    headers.append('Authorization', token) */ const id = sessionStorage.getItem("@contactId");
+    const id = sessionStorage.getItem("@contactId");
     const response = await fetch(baseUrl + "contact/" + id, {
         headers,
         method: "GET"
@@ -837,10 +878,10 @@ const ContactDelete = async (id)=>{
     });
     return await response.json();
 };
-async function ArrangeObject(formData) {
+function ArrangeObject(formData) {
     const entries = Object.fromEntries(formData);
     const contato = {
-        idContato: entries.id,
+        idContato: entries.idContato,
         nome: entries.nome,
         apelido: entries.apelido,
         telefones: [
@@ -868,11 +909,11 @@ async function ArrangeObject(formData) {
         notas: entries.notas,
         foto: ""
     };
-    const foto = await fotoHandler(entries);
+    const foto = fotoHandler(entries);
     if (foto) contato.foto = foto.data;
     return contato;
 }
-const fotoHandler = async (entries)=>{
+const fotoHandler = (entries)=>{
     return new Promise((resolve, reject)=>{
         const compress = new (0, _compressJsDefault.default)();
         const upload = [];
@@ -1496,7 +1537,7 @@ const editarContato = async (event)=>{
         window.alert("Contato Atualizado com Sucesso!");
     } else window.alert("Erro no edi\xe7\xe3o! Verifique os dados inseridos!");
 };
-const events = ()=>{
+const events = async ()=>{
     formCreate.addEventListener("submit", editarContato);
 };
 const EditarContato = ()=>{

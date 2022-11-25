@@ -1,11 +1,13 @@
-import { ContactPatch } from "../services/contact.service.js"
+import { ContactPatch } from "../services/contact.service.js";
 
 
 const formCreate = document.createElement('form')
 formCreate.setAttribute('id', 'p-create')
 
+
 const editarContato = async (event) => {
     event.preventDefault()
+
     const fd = new FormData(formCreate)
     const response = await ContactPatch(fd)
 
@@ -19,11 +21,15 @@ const editarContato = async (event) => {
     }      
 }
 
-const events = () => {
+
+
+const events = async () => {
     formCreate.addEventListener('submit', editarContato)
 }
 
-export const EditarContato = () => {
+
+export const EditarContato =  () => {
+
     formCreate.innerHTML = (`
         <div class="form_header">
             <h1>
@@ -113,6 +119,7 @@ export const EditarContato = () => {
             <button type="button" onclick="window.open('#contatos', '_self')" id="btn_cancelar" form="p-create">Cancelar</button>
         </div>
     `)
+
 
     events()
     return formCreate

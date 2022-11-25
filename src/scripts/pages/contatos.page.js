@@ -83,7 +83,7 @@ const createSearchArea = () => {
     const menu = `
             <div class="search_container">
                 <div>
-                // <button id="btnExportToCsv" class="btn-todos" style="margin-right: 10px;">
+                    <button id="btnExportToCsv" class="btn-todos" style="margin-right: 10px;">
                         Exportar
                     </button>
                     <input type="text" id="search" placeholder="Buscar contato">
