@@ -7,7 +7,7 @@ const criarContato = async (event) => {
     event.preventDefault()
     const fd = new FormData(formCreate)
     const response = await ContactPost(fd)
-    /* console.log(response); */
+    console.log(response);
 
     if(response.status === 200) {
         window.open('#contatos', '_self')
@@ -56,7 +56,7 @@ export const CriarContato = () => {
             </div>
             <div class="form_fotos">
                 <label for="foto">Foto</label>
-                <input type="file" accept="image/*" id="Foto" name="foto">
+                <input type="file" accept="image/*" id="foto" name="foto">
             </div>
             <div class="div_telefone">
                 <h3>Telefones</h3>

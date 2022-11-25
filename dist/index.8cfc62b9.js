@@ -831,7 +831,11 @@ const headers = new Headers();
 headers.append("Content-Type", "application/json");
 const token = sessionStorage.getItem("@token");
 headers.append("Authorization", token);
+function refreshToken() {
+    headers.set("Authorization", sessionStorage.getItem("@token"));
+}
 const ContactGet = async ()=>{
+    refreshToken();
     const response = await fetch(baseUrl + "contact", {
         headers,
         method: "GET"
@@ -858,7 +862,7 @@ const ContactPost = async (formData)=>{
     return await response.json();
 };
 const ContactPatch = async (formData)=>{
-    const contato = ArrangeObject(formData);
+    const contato = await ArrangeObject(formData);
     const body = JSON.stringify(contato);
     const response = await fetch(baseUrl + "contact", {
         body,
@@ -878,7 +882,7 @@ const ContactDelete = async (id)=>{
     });
     return await response.json();
 };
-function ArrangeObject(formData) {
+async function ArrangeObject(formData) {
     const entries = Object.fromEntries(formData);
     const contato = {
         idContato: entries.idContato,
@@ -909,11 +913,11 @@ function ArrangeObject(formData) {
         notas: entries.notas,
         foto: ""
     };
-    const foto = fotoHandler(entries);
+    const foto = await fotoHandler(entries);
     if (foto) contato.foto = foto.data;
     return contato;
 }
-const fotoHandler = (entries)=>{
+const fotoHandler = async (entries)=>{
     return new Promise((resolve, reject)=>{
         const compress = new (0, _compressJsDefault.default)();
         const upload = [];
@@ -1425,7 +1429,8 @@ const criarContato = async (event)=>{
     event.preventDefault();
     const fd = new FormData(formCreate);
     const response = await (0, _contactServiceJs.ContactPost)(fd);
-    /* console.log(response); */ if (response.status === 200) {
+    console.log(response);
+    if (response.status === 200) {
         window.open("#contatos", "_self");
         window.alert("Contato Criado com Sucesso!");
     } else window.alert("Erro no cria\xe7\xe3o! Verifique os dados inseridos!");
@@ -1464,7 +1469,7 @@ const CriarContato = ()=>{
             </div>
             <div class="form_fotos">
                 <label for="foto">Foto</label>
-                <input type="file" accept="image/*" id="Foto" name="foto">
+                <input type="file" accept="image/*" id="foto" name="foto">
             </div>
             <div class="div_telefone">
                 <h3>Telefones</h3>

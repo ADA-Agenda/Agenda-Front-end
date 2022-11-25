@@ -7,6 +7,7 @@ headers.append('Content-Type', 'application/json')
 const token = sessionStorage.getItem("@token");
 headers.append('Authorization', token);
 
+
 function refreshToken() {
     headers.set('Authorization', sessionStorage.getItem("@token"))
 }
@@ -36,7 +37,7 @@ export const ContactPost = async (formData) => {
 
 
 export const ContactPatch = async (formData) => {
-    const contato = ArrangeObject(formData);
+    const contato = await ArrangeObject(formData);
     const body = JSON.stringify(contato);
     const response = await fetch(baseUrl + 'contact', { body, headers, method: "PATCH" })
     return await response.json()
@@ -50,7 +51,7 @@ export const ContactDelete = async (id) => {
 }
 
 
-function ArrangeObject(formData) {
+async function ArrangeObject(formData) {
 
     const entries = Object.fromEntries(formData);
 
@@ -71,14 +72,14 @@ function ArrangeObject(formData) {
         foto: ""
     }
 
-    const foto = fotoHandler(entries);
+    const foto = await fotoHandler(entries);
     if(foto) contato.foto = foto.data;
 
     return contato;
 }
 
 
-const fotoHandler = (entries) => {
+const fotoHandler = async (entries) => {
     return new Promise((resolve,reject) =>{
         const compress = new Compress();
 
