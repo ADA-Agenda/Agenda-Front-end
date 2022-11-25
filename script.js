@@ -3,10 +3,12 @@ import { CriarConta } from "./src/scripts/pages/criar-conta.page.js";
 import { Login } from "./src/scripts/pages/login.page.js";
 import { CriarContato } from "./src/scripts/pages/criar-contato.page.js";
 import { EditarContato } from "./src/scripts/pages/editar-contato.page.js";
-import {ContatoUnico} from "./src/scripts/pages/contato-unico.page.js";
+import { ContatoUnico } from "./src/scripts/pages/contato-unico.page.js";
+import { Footer } from "./src/scripts/components/footer.component.js"
 
 function redirectPages() {
     const root = document.getElementById('root')
+    const footer = document.getElementById('footer')
 
     const Router = {
         '#login': { component: Login, path: '#login' },
@@ -39,8 +41,12 @@ function redirectPages() {
     }
 
     root.innerHTML = null
+    
     root.append(route.component())
     window.history.pushState(null, null, route.path)
+
+    footer.append(document.createElement("br"))
+    footer.append(Footer())
 }
 
 
