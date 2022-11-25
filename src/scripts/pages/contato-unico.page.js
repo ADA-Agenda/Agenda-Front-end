@@ -26,20 +26,26 @@ const getContact = async () => {
 const renderContact = contact => {
 
         const contactHtml = `
-        <div class="contacts__card" id="${contact.id}">
-            <div>
-                <div class="contacts__img">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Foto do contato">
-                </div>
-                <div class="contacts__data">
-                    <p>${contact.nome}</p>
-                    <span>${contact.email}</span>
-                    <div>
-                        ${contact.telefones.map(tel => `<span>${tel.numero}</span>`).join(" ")}
-                    </div>   
-                </div>
-            </div>
+        <div class="container-contato">
+        <div class="contato-photo">
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Foto do contato">
         </div>
+        <div class="contato-dados">
+            <p>Nome: ${contact.nome}</p>
+            <p>Apelido: ${contact.apelido}</p>
+            <p>Email: ${contact.email}</p>
+            <p>Notas: ${contact.notas}</p>
+        </div>
+
+        <div class="contato-dados">
+            <p>Telefone celular: ${contact.telefones[0].numero}</p>
+            <p>Telefone residencial: ${contact.telefones[1].numero}</p>
+            <p>Telefone trabalho: ${contact.telefones[2].numero}</p>
+            <p>Endereço: ${contact.endereco.logradouro} ${contact.endereco.cidade} ${contact.endereco.estado} ${contact.endereco.cep} ${contact.endereco.pais} </p>
+            
+        </div>
+    </div>
+
         `
         
     contactsContainer.insertAdjacentHTML("beforeend", contactHtml);

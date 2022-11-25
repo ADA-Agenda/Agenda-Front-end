@@ -3,6 +3,7 @@
 @import url('./src/styles/contatos.page.css');
 @import url('./src/styles/criar-contato.page.css');
 @import url('./src/styles/editar-contato.page.css');
+@import url('./src/styles/contato-unico.page.css');
 
 * {
     margin: 0;
