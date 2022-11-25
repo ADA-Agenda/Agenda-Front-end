@@ -1,15 +1,91 @@
+.p-contact_byId{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.p-contact_byId i{
+    color: #fff;
+    font-size: 2.5rem;
+    margin-top: 50px;
+}
+
 .container-contato{
+    width: 100%;
+    max-width: 1100px;
     display: flex;
     color: azure;
-    font-size: 2rem;
+    font-size: 1.8rem;
     align-items: center;
-    justify-content: space-evenly;
-    width: 100%;
+    justify-content: space-between;
+    background-color: #302F3D;
+    margin-top: 5%;
+    border-radius: 12px;
+    padding: 25px;
+    gap: 30px;
+}
+
+
+.container-contato span {
+    color: #ab21fb;
+    text-transform: uppercase;
+    font-size: 1.2rem;
 }
 
 .container-contato p {
     margin-bottom: 1rem;
-    background-color: #8502D1;
-    padding: .5em;
+    background-color: #3e3c4f;
+    padding: .5em 0.8em;
     border-radius: 15px;
+    min-height: 50px;
+    width: 100%;
+    color: #D3CED8;
+}
+
+.contato-photo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+}
+
+.contato-photo img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.contato-dados{
+    width: 100%;
+}
+
+.contato-photo h1{
+    margin-top: 30px;
+    text-transform: capitalize;
+    color: #D3CED8;
+}
+
+.contato-group{
+    display: flex;
+    width: 100%; 
+    gap: 0 20px;
+}
+
+.contato-group div{
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+}
+
+
+
+@media screen and (max-width: 900px) {
+  
+    .container-contato{
+        flex-direction: column;
+    }
 }

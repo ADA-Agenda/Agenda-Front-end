@@ -840,6 +840,7 @@ const ContactDelete = async (id)=>{
 async function ArrangeObject(formData) {
     const entries = Object.fromEntries(formData);
     const contato = {
+        idContato: entries.id,
         nome: entries.nome,
         apelido: entries.apelido,
         telefones: [
@@ -1599,10 +1600,9 @@ parcelHelpers.export(exports, "ContatoUnico", ()=>ContatoUnico);
 var _headerComponentJs = require("../components/header.component.js");
 var _contactServiceJs = require("../services/contact.service.js");
 const root = document.getElementById("root");
-const contacts = document.createElement("div");
-contacts.setAttribute("id", "p-contacts");
-const contactsContainer = document.createElement("div");
-contactsContainer.setAttribute("class", "contacts__container");
+/* const contacts = document.createElement('div')
+contacts.setAttribute('id', 'p-contacts') */ const contactsContainer = document.createElement("div");
+contactsContainer.setAttribute("class", "p-contact_byId");
 const getContact = async ()=>{
     const response = await (0, _contactServiceJs.ContactGetById)();
     if (response.status === 200) {
@@ -1612,37 +1612,71 @@ const getContact = async ()=>{
 };
 const renderContact = (contact)=>{
     const contactHtml = `
+    
         <div class="container-contato">
-        <div class="contato-photo">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Foto do contato">
-        </div>
-        <div class="contato-dados">
-            <p>Nome: ${contact.nome}</p>
-            <p>Apelido: ${contact.apelido}</p>
-            <p>Email: ${contact.email}</p>
-            <p>Notas: ${contact.notas}</p>
-        </div>
+            <div class="contato-photo">
+                <img src="data:image/jpeg;base64,${contact.foto}" alt="Foto do contato">
+                <h1>${contact.nome}</h1>
+            </div>
+            <div class="contato-dados">
+                
+                <span>Nome </span>
+                <p>${contact.nome}</p>
 
-        <div class="contato-dados">
-            <p>Telefone celular: ${contact.telefones[0].numero}</p>
-            <p>Telefone residencial: ${contact.telefones[1].numero}</p>
-            <p>Telefone trabalho: ${contact.telefones[2].numero}</p>
-            <p>Endereço: ${contact.endereco.logradouro} ${contact.endereco.cidade} ${contact.endereco.estado} ${contact.endereco.cep} ${contact.endereco.pais} </p>
-            
-        </div>
-    </div>
+                <span>Apelido </span>
+                <p>${contact.apelido}</p>
 
-        `;
+                <span>E-mail </span>
+                <p>${contact.email}</p>
+
+                <span>Notas </span>
+                <p>${contact.notas}</p>
+            </div>
+    
+            <div class="contato-dados">
+                <span>celular </span>
+                <p>${contact.telefones[0].numero}</p>
+
+                <div class="contato-group">
+                    <div>
+                        <span>residencial </span>
+                        <p>${contact.telefones[1].numero}</p>
+                    </div>
+    
+                    <div>
+                        <span>comercial </span>
+                        <p>${contact.telefones[2].numero}</p>
+                    </div>
+                </div>
+
+                <span>Endereço </span>
+                <p>${contact.endereco.logradouro} ${contact.endereco.cidade} ${contact.endereco.estado} ${contact.endereco.cep} ${contact.endereco.pais} </p>        
+                
+                <div class="contato-group">
+                    <div>
+                        <span>Cidade </span>
+                        <p>${contact.endereco.cidade} ${contact.endereco.estado} ${contact.endereco.pais} </p>
+                    </div>   
+    
+                    <div>
+                        <span>CEP </span>
+                        <p>${contact.endereco.cep}</p> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <a href="#contatos"><i class="fa fa-solid fa-reply"></i></a>
+    `;
     contactsContainer.insertAdjacentHTML("beforeend", contactHtml);
 };
 const ContatoUnico = ()=>{
     const header = (0, _headerComponentJs.Header)();
     root.append(header);
-    contacts.innerHTML = " ";
+    /* contacts.innerHTML= " ";
     contactsContainer.innerHTML = " ";
-    contacts.appendChild(contactsContainer);
+    contacts.appendChild(contactsContainer) */ contactsContainer.innerHTML = " ";
     getContact();
-    return contacts;
+    return contactsContainer;
 };
 
 },{"../components/header.component.js":"5Zcf5","../services/contact.service.js":"bHr4j","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["2mNKm","6rimH"], "6rimH", "parcelRequire3316")
